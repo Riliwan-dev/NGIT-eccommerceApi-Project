@@ -7,12 +7,15 @@ dotenv.config();
 
 const app = express();
 
-// 2. Middleware to handle JSON data [cite: 22]
+// 2. Middleware to handle JSON data
 app.use(express.json());
 
-// Link the auth routes
+// --- ROUTES ---
 app.use('/api/auth', require('./src/routes/userRoutes'));
 app.use('/api/products', require('./src/routes/productRoutes'));
+
+// >>> ADD THIS NEW LINE FOR TASK 4 <<<
+app.use('/api/cart', require('./src/routes/cartRoutes')); 
 
 // 3. Task 01: Health Endpoint 
 app.get('/health', (req, res) => {
@@ -24,7 +27,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected Successfully'))
     .catch((err) => {
         console.error('❌ MongoDB Connection Failed:', err.message);
-        process.exit(1); // Stop the server if DB fails
+        process.exit(1); 
     });
 
 // 5. Start the Server 
