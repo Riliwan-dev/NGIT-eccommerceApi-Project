@@ -11,11 +11,17 @@ const app = express();
 app.use(express.json());
 
 // --- ROUTES ---
-app.use('/api/auth', require('./src/routes/userRoutes'));
-app.use('/api/products', require('./src/routes/productRoutes'));
+/** * IMPORTANT: Since index.js is inside the 'src' folder, 
+ * we use './routes/...' instead of './src/routes/...'
+ */
+app.use('/api/auth', require('./routes/userRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
 
-// >>> ADD THIS NEW LINE FOR TASK 4 <<<
-app.use('/api/cart', require('./src/routes/cartRoutes')); 
+// >>> Task 4: Cart Routes <<<
+app.use('/api/cart', require('./routes/cartRoutes')); 
+
+// >>> Task 5: Order Routes <<<
+app.use('/api/orders', require('./routes/orderRoutes'));
 
 // 3. Task 01: Health Endpoint 
 app.get('/health', (req, res) => {
