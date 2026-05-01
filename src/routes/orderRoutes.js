@@ -3,30 +3,23 @@ const router = express.Router();
 
 const {
   createOrder,
+  paidOrder,
   getOrders,
-  getOrderById,
-  updateOrderStatus
 } = require("../controllers/orderController");
 
-// Correct folder name = middlewares
+// Middlewares
 const authMiddleware = require("../middlewares/authMiddleware");
-const requireAdmin = require("../middlewares/requireAdmin");
 
+// Create Order
 // POST /api/orders
 router.post("/", authMiddleware, createOrder);
 
+// Get User Orders
 // GET /api/orders
 router.get("/", authMiddleware, getOrders);
 
-// GET /api/orders/:id
-router.get("/:id", authMiddleware, getOrderById);
-
-// PATCH /api/orders/:id/status
-router.patch(
-  "/:id/status",
-  authMiddleware,
-  requireAdmin,
-  updateOrderStatus
-);
+// Mark Order as Paid
+// PATCH /api/orders/:id/pay
+router.patch("/:id/pay", authMiddleware, paidOrder);
 
 module.exports = router;
