@@ -11,17 +11,12 @@ const app = express();
 app.use(express.json());
 
 // --- ROUTES ---
-/** * IMPORTANT: Since index.js is inside the 'src' folder, 
- * we use './routes/...' instead of './src/routes/...'
- */
-app.use('/api/auth', require('./routes/userRoutes'));
-app.use('/api/products', require('./routes/productRoutes'));
+// Corrected paths: index.js and routes are in the same 'src' folder
+app.use('/api/auth', require('./src/routes/userRoutes'));
+app.use('/api/products', require('./src/routes/productRoutes'));
+app.use('/api/cart', require('./src/routes/cartRoutes')); 
+app.use('/api/orders', require('./src/routes/orderRoutes'));
 
-// >>> Task 4: Cart Routes <<<
-app.use('/api/cart', require('./routes/cartRoutes')); 
-
-// >>> Task 5: Order Routes <<<
-app.use('/api/orders', require('./routes/orderRoutes'));
 
 // 3. Task 01: Health Endpoint 
 app.get('/health', (req, res) => {
